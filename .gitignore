@@ -1,0 +1,13 @@
+# Build files
+dist/*
+build/*
+
+# Package-Lock
+package-lock.json
+
+# IDE Files
+.idea
+.vscode
+
+# Node Modules
+node_modules
