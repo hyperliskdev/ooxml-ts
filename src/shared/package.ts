@@ -11,7 +11,6 @@ import ContentType from "./content-type";
 import BasePart from "./parts/base-part";
 import BaseRelationship from "./rels/relationship";
 
-
 export default interface Package {
     contentType: ContentType;
     relationships<T extends BaseRelationship>(): T[];
