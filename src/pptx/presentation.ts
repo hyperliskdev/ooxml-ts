@@ -10,6 +10,7 @@ export class Presentation implements Package {
         console.log("Presentation constructor");
         this.contentType = new ContentType();
     }
+
     relationships<T extends BaseRelationship>(): T[] {
         throw new Error("Method not implemented.");
     }

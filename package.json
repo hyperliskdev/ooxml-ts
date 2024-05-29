@@ -20,10 +20,11 @@
   "author": "Carter Tomlenovich (hyperliskdev)",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^20.12.12",
+    "@types/node": "^20.12.13",
     "typescript": "^5.4.5"
   },
   "dependencies": {
-    "jszip": "^3.10.1"
+    "jszip": "^3.10.1",
+    "process": "^0.11.10"
   }
 }

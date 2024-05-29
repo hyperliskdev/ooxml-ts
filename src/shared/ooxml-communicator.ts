@@ -8,7 +8,13 @@ export default abstract class OOXMLCommunicator {
         console.log("OOXMLCommunicator constructor");
     }
 
-    abstract read<T extends Promise<P>, P extends Package>(data: Buffer):  T;
+    render(): Buffer {
+
+        throw new Error("Method not implemented.");
+
+    };
+
+    abstract read<T extends Package>(data: Buffer):  Promise<T>;
 
     abstract write(): Buffer; 
 
