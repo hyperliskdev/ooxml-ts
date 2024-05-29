@@ -42,5 +42,6 @@ export default class ContentType {
   parse(): void {
     // Parse the content type file.
     
+    
   }
 }
