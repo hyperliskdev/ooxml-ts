@@ -1,1 +1,1 @@
-import * as PPTX from './pptx'
+export * from "./pptx";
