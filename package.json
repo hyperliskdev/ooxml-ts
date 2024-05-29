@@ -2,21 +2,28 @@
   "name": "ooxml-ts",
   "version": "1.0.0",
   "description": "A JavaScript package written in TypeScript to perform reading/writing actions on OOXML files.",
-  "main": "./ooxml.js",
-  "browser": "./ooxml.min.js",
-  "types": "./index.d.ts",
+  "main": "./dist/ooxml.js",
+  "browser": "./dist/ooxml.min.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "/dist"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/hyperliskdev/ooxml-ts.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Carter Tomlenovich (hyperliskdev)",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^20.12.12",
     "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "jszip": "^3.10.1"
   }
 }
