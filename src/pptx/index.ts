@@ -50,7 +50,6 @@ export class PPTX extends OOXMLCommunicator {
       switch (entryName) {
         // Content Types file.
         case "[Content_Types].xml": {
-          console.log(stream);
           break;
         }
         default: {

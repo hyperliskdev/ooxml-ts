@@ -1,3 +1,4 @@
+import { Stream } from "stream";
 import BasePart from "./base-part";
 
 
@@ -17,4 +18,8 @@ import BasePart from "./base-part";
  * ### Values
  * `<characteristic !name="string" !relation="ge | le | gt | lt | eq" !val="string" ?vocabulary="xsd:anyURI"/>`
  */
-export default class AdditionalCharacteristics extends BasePart {};
+export default class AdditionalCharacteristics extends BasePart {
+    render(): Stream {
+        throw new Error("Method not implemented.");
+    }
+};

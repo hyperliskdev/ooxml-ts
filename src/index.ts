@@ -1,1 +1,1 @@
-export * from "./pptx";
+export * as pptx from './pptx';
