@@ -1,1 +1,6 @@
-export class Workbook {}
+class Workbook {
+  constructor() {}
+}
+
+
+export default Workbook;
