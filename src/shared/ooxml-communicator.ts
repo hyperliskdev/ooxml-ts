@@ -8,7 +8,8 @@ export default abstract class OOXMLCommunicator {
         console.log("OOXMLCommunicator constructor");
     }
 
-    abstract read<T extends Promise<Package<BaseRelationship, BasePart>>>(data: Buffer): T ; 
+    abstract read<T extends Promise<P>, P extends Package>(data: Buffer):  T;
+
     abstract write(): Buffer; 
 
 }
