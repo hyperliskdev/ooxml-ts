@@ -1,3 +1,4 @@
+import { Stream } from "stream";
 import BasePart from "./base-part";
 
 /**
@@ -89,4 +90,8 @@ import BasePart from "./base-part";
  * - `<Year/>`
  * - `<YearAccessed/>`
  */
-export default class Bibliography extends BasePart {}
+export default class Bibliography extends BasePart {
+    render(): Stream {
+        throw new Error("Method not implemented.");
+    }
+}
