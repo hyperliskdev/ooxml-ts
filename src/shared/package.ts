@@ -1,6 +1,3 @@
-
-
-
 /**
  * OOXML Package
  * 
@@ -10,30 +7,13 @@
  * 
  */
 
+import ContentType from "./content-type";
 import BasePart from "./parts/base-part";
 import BaseRelationship from "./rels/relationship";
 
 
-export default abstract class Package<R extends BaseRelationship, P extends BasePart> {
-
-    // Content Type
-    contentType: string;
-
-    // A list of all relationships in the package.
-    relationships: R[];
-
-    // A list of all the parts in the package.
-    parts: P[];
-
-    constructor() {
-        console.log("Package constructor");
-
-        this.contentType = "";
-        this.relationships = [];
-        this.parts = [];
-    }
-
-    abstract parse(): void;
-    
-
+export default interface Package {
+    contentType: ContentType;
+    relationships<T extends BaseRelationship>(): T[];
+    parts<T extends BasePart>(): T[];
 }
