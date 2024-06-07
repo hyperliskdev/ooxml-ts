@@ -1,0 +1,1 @@
+import OOXMLCommunicator from "./ooxml-communicator";
