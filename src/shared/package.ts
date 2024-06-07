@@ -9,10 +9,19 @@
 
 import ContentType from "./content-type";
 import BasePart from "./parts/base-part";
-import BaseRelationship from "./rels/base-relationship";
+import Relationship from "./rels/relationship";
 
-export default interface Package {
-    contentType: ContentType;
-    relationships<T extends BaseRelationship>(): T[];
-    parts<T extends BasePart>(): T[];
+export default abstract class Package {
+    abstract contentType: ContentType;
+    abstract parts: BasePart[];
+    abstract relationships: Relationship[];
+
+    constructor() {}
+
+    abstract addParts<T extends BasePart>(part: T): void;
+    abstract addRelationships<T extends Relationship>(rel: T): void;
+
+    initContentType(contentType: ContentType): void {
+        this.contentType = contentType;
+    };
 }
