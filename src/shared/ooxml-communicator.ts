@@ -1,8 +1,20 @@
-// The act of communication is the collection of reading and writing data.
+import { SAXParser } from "sax-ts";
+import Package from "./package";
+
+
 export default abstract class OOXMLCommunicator {
-    // Buffer functions
-    abstract read(data: Buffer, options?: any ): any;
-    abstract write(data: any): void;
+
+    entryList: string[] = [];
+    package!: Package;
+
+    constructor() {}
+
+    getEntryList(): string[] { return this.entryList; }
+    pushEntry(entry: string): void { this.entryList.push(entry); }
+
+    render(): Buffer {throw new Error("Method not implemented.");};
+
+    abstract read<T extends Package>(data: Buffer):  Promise<T>;
+
+    abstract write(): Buffer;  
 }
-
-
