@@ -12,6 +12,17 @@ This project is based on the ECMA-376 & ISO/IEC-29500 standards. This is a stand
 
 ### Usage
 
-
 ### Roadmap
+
+### License
+
+Distributed under the Apache 2.0 License. See [Apache 2.0 License](https://opensource.org/license/apache-2-0) for more information.
+
+### Contact
+
+Carter Tomlenovich - @hyperliskdev - cartertomlenovich@gmail.com
+
+
+https://github.com/hyperliskdev/ts-ooxml
+
 
