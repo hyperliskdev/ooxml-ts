@@ -5,4 +5,3 @@
      <a href="https://github.com/hyperliskdev/ooxml-ts/wiki/Developer-Guide">Join the Project .</a> <a href="https://github.com/hyperliskdev/ooxml-ts/issues/new?assignees=&labels=&projects=&template=bug_report.md&title=">Report Bug .</a> <a href="https://github.com/hyperliskdev/ooxml-ts/issues/new?assignees=&labels=&projects=&template=feature_request.md&title=">Request Feature</a> </p>
 </div>
 
-## 
