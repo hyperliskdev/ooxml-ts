@@ -1,21 +1,20 @@
+import { SAXParser } from "sax-ts";
 import Package from "./package";
-import BasePart from "./parts/base-part";
-import BaseRelationship from "./rels/base-relationship";
 
 
 export default abstract class OOXMLCommunicator {
-    constructor() {
-        console.log("OOXMLCommunicator constructor");
-    }
 
-    render(): Buffer {
+    entryList: string[] = [];
+    package!: Package;
 
-        throw new Error("Method not implemented.");
+    constructor() {}
 
-    };
+    getEntryList(): string[] { return this.entryList; }
+    pushEntry(entry: string): void { this.entryList.push(entry); }
+
+    render(): Buffer {throw new Error("Method not implemented.");};
 
     abstract read<T extends Package>(data: Buffer):  Promise<T>;
 
-    abstract write(): Buffer; 
-
+    abstract write(): Buffer;  
 }

@@ -7,18 +7,9 @@ describe("Initial test", () => {
     let pptx = new OOXML.pptx.PPTX();
 
     let file = await readFileSync("./tests/test_files/GoldStandardPPTX.pptx");
-
-    // let file = await new Promise<Buffer>((resolve, reject) => {
-    //   readFile("./test_files/GoldStandardPPTX.pptx", (err, data) => {
-    //     if (err) {
-    //       reject(err);
-    //     } else {
-    //       resolve(data);
-    //     }
-    //   });
-    // });
-
-    pptx.read(Buffer.from(file));
+    let presentation = await pptx.read(Buffer.from(file));
+    
+    console.log(presentation);
 
   })
 });
