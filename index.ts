@@ -1,2 +1,1 @@
-import * as OOXML from './dist/es6';
-export default OOXML;
+export * as OOXML from './dist';
