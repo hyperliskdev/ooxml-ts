@@ -1,8 +1,14 @@
-// The act of communication is the collection of reading and writing data.
+import Package from "./package";
+import BasePart from "./parts/base-part";
+import BaseRelationship from "./rels/base-relationship";
+
+
 export default abstract class OOXMLCommunicator {
-    // Buffer functions
-    abstract read(data: Buffer, options?: any ): any;
-    abstract write(data: any): void;
+    constructor() {
+        console.log("OOXMLCommunicator constructor");
+    }
+
+    abstract read<T extends Promise<Package<BaseRelationship, BasePart>>>(data: Buffer): T ; 
+    abstract write(): Buffer; 
+
 }
-
-
