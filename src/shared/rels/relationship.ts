@@ -1,41 +1,27 @@
-import { SAXParser } from "sax-ts";
-import { PassThrough } from "stream";
+import { BaseXML } from "../base-xml";
 
-const relParser = new SAXParser(false, {
-  xmlns: true,
-  position: true,
-});
 
 export default class Relationship {
-  id: string = "";
-  type: string = "";
-  target: string = "";
-  targetMode?: string = "";
+    id: string = "";
+    type: string = "";
+    target: string = "";
+    targetMode?: string;
+    
+    constructor(attrs: { [key: string]: string }) {
+        this.id = attrs.Id;
+        this.type = attrs.Type;
+        this.target = attrs.Target;
 
-  constructor() {};
-
-  parse(stream: PassThrough) {
-
-    let relationship: Relationship;
-
-    relParser.on("opentag", (node: any) => {
-      if (node.name === "Relationship") {
-        relationship = new Relationship();
-        relationship.id = node.attributes.Id;
-        relationship.type = node.attributes.Type;
-        relationship.target = node.attributes.Target;
-        relationship.targetMode = node.attributes.TargetMode;
-      }
-    });
-
-    stream.on("data", (chunk: Buffer) => {
-      relParser.write(chunk.toString());
-    });
-
-    stream.on("end", () => {
-      relParser.close();
-      return relationship;
-    });
-
-  }
+        if (attrs.TargetMode) {
+            this.targetMode = attrs.TargetMode;
+        }
+    }
+    
+    render(): string {
+        if (this.targetMode) {
+            return `<Relationship Id="${this.id}" Type="${this.type}" Target="${this.target}" TargetMode="${this.targetMode}" />`;
+        } else {
+            return `<Relationship Id="${this.id}" Type="${this.type}" Target="${this.target}" />`;
+        }
+    }
 }

@@ -1,4 +1,4 @@
-import { readFile, readFileSync } from "fs";
+import { readFileSync } from "fs";
 import { OOXML } from "..";
 
 describe("Initial test", () => {

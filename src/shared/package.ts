@@ -7,21 +7,22 @@
  * 
  */
 
-import ContentType from "./content-type";
-import BasePart from "./parts/base-part";
-import Relationship from "./rels/relationship";
+import { BasePart } from "./base-part";
+import { BaseRelationship } from "./base-relationship";
+import { CoreProperties } from "./core-props";
 
 export default abstract class Package {
-    abstract contentType: ContentType;
-    abstract parts: BasePart[];
-    abstract relationships: Relationship[];
 
-    constructor() {}
+    // A list of objects that extend the BasePart class
+    protected parts: BasePart[] = [];
+    protected relationships: BaseRelationship[] = [];
+    
+    protected coreProperties: CoreProperties = new CoreProperties();
+    protected appProperties: AppProperties = new AppProperties();
 
-    abstract addParts<T extends BasePart>(part: T): void;
-    abstract addRelationships<T extends Relationship>(rel: T): void;
+    constructor() {
+        
+        
+    }
 
-    initContentType(contentType: ContentType): void {
-        this.contentType = contentType;
-    };
 }

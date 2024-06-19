@@ -4,7 +4,7 @@ import OOXMLCommunicator from "../shared/ooxml-communicator";
 import { PassThrough, Stream } from "stream";
 import ContentType from "../shared/content-type";
 import Package from "../shared/package";
-import { Presentation } from "./presentation";
+import Workbook from "./workbook";
 import Relationship from "../shared/rels/relationships";
 
 export class PPTX extends OOXMLCommunicator {
@@ -12,7 +12,7 @@ export class PPTX extends OOXMLCommunicator {
 
   constructor() {
     super();
-    this.package = new Presentation();
+    this.package = new Workbook();
 
   }
 
@@ -47,17 +47,7 @@ export class PPTX extends OOXMLCommunicator {
       let content = await entry.async("string");
 
 
-      // Switch statement to determine the type of entry
-      switch (entryName) {
-        case "_rels/.rels": {
-          let rels = new Relationship();
-          this.package.addRelationships(await rels.parse(content));
-          break;
-        };
-        default: {
-          continue;
-        }
-      }
+     
     }
     return {} as Presentation;
   }
