@@ -1,22 +1,16 @@
 import JSZip from "jszip";
 
 import OOXMLCommunicator from "../shared/ooxml-communicator";
-import { PassThrough, Stream } from "stream";
 import ContentType from "../shared/content-type";
-import Package from "../shared/package";
 import Workbook from "./workbook";
-import Relationship from "../shared/rels/relationships";
 
-export class PPTX extends OOXMLCommunicator {
-
-
+export class XLSX extends OOXMLCommunicator {
   constructor() {
     super();
     this.package = new Workbook();
-
   }
 
-  async read<Presentation>(data: Buffer): Promise<Presentation> {
+  async read<Workbook>(data: Buffer): Promise<Workbook> {
     // Form the zip object from the file buffer
     const zip = await JSZip.loadAsync(data);
 
@@ -46,10 +40,54 @@ export class PPTX extends OOXMLCommunicator {
       }
       let content = await entry.async("string");
 
+      // Switch-case the entry name and handle the content accordingly
+      switch (entryName) {
+        // Content-Type item
+        case "[Content_Types].xml": {
+          break;
+        }
 
-     
+        // Package Relationships
+        case "_rels/.rels": {
+          break;
+        }
+
+        // Application-Defined File Properties Part
+        case "docProps/app.xml": {
+        }
+
+        // Core File Properties Part
+        case "docProps/core.xml": {
+        }
+
+        // 
+        case "xl/workbook.xml": {
+        }
+
+        case "xl/_rels/workbook.xml.rels": {
+        }
+
+        case "xl/calcChain.xml": {
+        }
+
+        case "xl/sharedStrings.xml": {
+        }
+
+        case "xl/styles.xml": {
+        }
+
+        case "xl/theme/theme1.xml": {
+        }
+
+        case "xl/volatileDependencies.xml": {
+        }
+
+        default: {
+          console.log("Unhandled entry: ", entryName);
+        }
+      }
     }
-    return {} as Presentation;
+    return {} as Workbook;
   }
 
   write(): Buffer {
