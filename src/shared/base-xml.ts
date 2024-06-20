@@ -30,6 +30,32 @@ export interface XMLNode {
 
 export abstract class BaseXML {
 
+  public render(): string {
+    throw new Error("Method not implemented.");
+  }
+
+  public parseXml(xml: string): void {
+    const parser = new SAXParser(true, {});
+    let current: BaseXML = this;
+
+    parser.onopentag = (node: XMLNode) => {
+      current.handleOpenTag(node);
+    };
+    parser.onclosetag = (tag: string) => {
+      current = current.handleCloseTag(tag);
+    };
+    parser.ontext = (text: string) => {
+      current.handleText(text);
+    };
+    parser.onattribute = (attr: XMLAttribute) => {
+      current.handleAttribute(attr);
+    };
+    parser.onend = () => {
+      current.handleEnd();
+    };
+    parser.write
+  }
+
   /* Handle reading an open tag. */
   protected abstract handleOpenTag(node: XMLNode): void;
 

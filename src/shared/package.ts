@@ -22,9 +22,9 @@ export default abstract class Package {
     private coreProperties: CoreProperties = new CoreProperties();
     private appProperties: AppProperties = new AppProperties();
     private contentType: ContentType = new ContentType();
-    private trash: TrashItem[] = [];
+    // private trash: TrashItem[] = [];
 
-    private zip: JSZip;
+    // private zip: JSZip;
 
     public addPart(part: Part): void {
         this.parts.push(part);
@@ -33,15 +33,29 @@ export default abstract class Package {
         this.relationships.push(relationship);
     }
 
+    /**
+     * @param partName - The name of the part to retrieve
+     * @returns The part with the given name
+     * 
+     * If a part cannot be found, an error is thrown.
+     */
     public getPart(partName: string): Part {
-        return this.parts.find(part => part.getPartName() === partName);
+        const part = this.parts.find(part => part.getPartName() === partName);
+        if (!part) {
+            throw new Error(`Part with name ${partName} not found`);
+        }
+        return part;
     }
     public getParts(): Part[] {
         return this.parts;
     }
 
     public getRelationship(relationshipId: string): Relationship {
-        return this.relationships.find(relationship => relationship.getRelationshipId() === relationshipId);
+        const relationship = this.relationships.find(relationship => relationship.getId() === relationshipId);
+        if (!relationship) {
+            throw new Error(`Relationship with id ${relationshipId} not found`);
+        }
+        return relationship;
     };
     public getRelationships(): Relationship[] {
         return this.relationships;
@@ -56,10 +70,17 @@ export default abstract class Package {
      * There are two different types of relationships: Explicit and Implicit.
      * - Implicit relationships: `sourcePart.someIdentifier` == `targetPart.someIdentifier`. To find the location of `targetPart` we use the type of the source part.
      * - Explicit relationships: `sourcePart.rId === relationship.Id`. To find the location of `targetPart` we use the relationship. 
-     * - 
+     * 
      */
-    public findRelatedPart(sourcePart: Part, relationship: Relationship): Part {
+    public findRelatedPart(sourcePart: Part, relationship: Relationship, isImplicit: boolean): Part {
+        let targetPart: Part;
+
+        if (isImplicit) {
+            targetPart = this.parts.find(part => part.getPartName() === sourcePart.getPartName());
+        } else {
+
+        }
         
-        
+
     }
 }

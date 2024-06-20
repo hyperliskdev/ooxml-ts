@@ -1,15 +1,11 @@
 import { BaseXML } from "../base-xml";
 
-export interface IRelationship {
-    id: string;
-    type: string;
-    target: string;
-    targetMode?: string;
-}
-
 export abstract class Relationship extends BaseXML {
 
-    // A relationship will be able to search a list of parts to find the target part.
+    private id: string = "";
+    private type: string = "";
+    private target: string = "";
+    private targetMode?: string = "";
 
     constructor() {
         super();
@@ -19,6 +15,42 @@ export abstract class Relationship extends BaseXML {
         throw new Error("Method not implemented.");
     }
 
-    
+    parseXml(xml: string): void {
+        throw new Error("Method not implemented.");
+    }
+
+    public setId(id: string): void {
+        this.id = id;
+    }
+
+    public getId(): string {
+        return this.id;
+    }
+
+    public setType(type: string): void {
+        this.type = type;
+    }
+
+    public getType(): string {
+        return this.type;
+    }
+
+    public setTarget(target: string): void {
+        this.target = target;
+    }
+
+    public getTarget(): string {
+        return this.target;
+    }
+
+    public setTargetMode(targetMode: string): void {
+        this.targetMode = targetMode;
+    }
+
+    public getTargetMode(): string | undefined {
+        return this.targetMode;
+    }
+
+    public abstract getRelationshipType(): string;
 
 }
