@@ -10,9 +10,12 @@
 import JSZip from "jszip";
 import { Relationship } from "./rels/relationship";
 import { Part } from "./parts/part";
+import { AppProperties, CoreProperties } from "./properties";
+import ContentType from "./content-type";
 
 
 export default abstract class Package {
+
 
     private parts: Part[] = [];
     private relationships: Relationship[] = [];
@@ -44,18 +47,19 @@ export default abstract class Package {
         return this.relationships;
     }
 
-    public findRelatedPart(relationship: Relationship): Part {
-
-        if (relationship.getTargetMode() === "External") {
-            return null;
-        }
-
-        return this.getPart(relationship.target);
+    /**
+     * 
+     * @param sourcePart - The part looking for some data in a related part
+     * @param relationship - The relationship that connects the source part to the target part
+     * @returns The target part
+     * 
+     * There are two different types of relationships: Explicit and Implicit.
+     * - Implicit relationships: `sourcePart.someIdentifier` == `targetPart.someIdentifier`. To find the location of `targetPart` we use the type of the source part.
+     * - Explicit relationships: `sourcePart.rId === relationship.Id`. To find the location of `targetPart` we use the relationship. 
+     * - 
+     */
+    public findRelatedPart(sourcePart: Part, relationship: Relationship): Part {
+        
         
     }
-    
-
-
-    constructor() {}
-
 }
