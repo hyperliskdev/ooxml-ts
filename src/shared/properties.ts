@@ -24,7 +24,7 @@ export class CoreProperties extends BaseXML{
         
 
     }
-    protected handleCloseTag(tag: string): void {
+    protected handleCloseTag<CoreProperties>(tag: string): CoreProperties {
         throw new Error("Method not implemented.");
     }
     protected handleText(text: string): void {

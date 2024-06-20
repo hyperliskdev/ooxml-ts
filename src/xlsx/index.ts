@@ -5,6 +5,7 @@ import ContentType from "../shared/content-type";
 import Workbook from "./workbook";
 
 export class XLSX extends OOXMLCommunicator {
+  
   constructor() {
     super();
     this.package = new Workbook();
@@ -38,6 +39,7 @@ export class XLSX extends OOXMLCommunicator {
         // If the entry is a directory, skip it and return to the beginning of the loop.
         continue;
       }
+      
       let content = await entry.async("string");
 
       // Switch-case the entry name and handle the content accordingly

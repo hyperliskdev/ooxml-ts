@@ -1,10 +1,5 @@
 import { SAXParser } from "sax-ts";
 
-export interface IXML {
-  parseXml(xml: string): void;
-  render(): string;
-}
-
 export interface XMLAttribute {
   name: string;
   value: string;
@@ -33,34 +28,13 @@ export interface XMLNode {
   isSelfClosing: boolean;
 }
 
-export abstract class BaseXML implements IXML {
-  protected parser: SAXParser;
-
-  constructor() {
-    this.parser = new SAXParser(true, {
-      xmlns: true,
-    });
-
-    this.parser.onopentag = this.handleOpenTag.bind(this);
-    this.parser.onattribute = this.handleAttribute.bind(this);
-    this.parser.ontext = this.handleText.bind(this);
-    this.parser.onclosetag = this.handleCloseTag.bind(this);
-
-    this.parser.onend = this.handleEnd.bind(this);
-  }
-  public render(): string {
-    throw new Error("Method not implemented.");
-  }
-
-  public parseXml(xml: string): void {
-    this.parser.parseString(xml);
-  }
+export abstract class BaseXML {
 
   /* Handle reading an open tag. */
   protected abstract handleOpenTag(node: XMLNode): void;
 
   /* Handle reading a close tag. */
-  protected abstract handleCloseTag(tag: string): void;
+  protected abstract handleCloseTag(tag: string): BaseXML;
 
   /* Handle reading text. */
   protected abstract handleText(text: string): void;

@@ -7,22 +7,55 @@
  * 
  */
 
-import { BasePart } from "./base-part";
-import { BaseRelationship } from "./base-relationship";
-import { CoreProperties } from "./core-props";
+import JSZip from "jszip";
+import { Relationship } from "./rels/relationship";
+import { Part } from "./parts/part";
+
 
 export default abstract class Package {
 
-    // A list of objects that extend the BasePart class
-    protected parts: BasePart[] = [];
-    protected relationships: BaseRelationship[] = [];
-    
-    protected coreProperties: CoreProperties = new CoreProperties();
-    protected appProperties: AppProperties = new AppProperties();
+    private parts: Part[] = [];
+    private relationships: Relationship[] = [];
+    private coreProperties: CoreProperties = new CoreProperties();
+    private appProperties: AppProperties = new AppProperties();
+    private contentType: ContentType = new ContentType();
+    private trash: TrashItem[] = [];
 
-    constructor() {
-        
+    private zip: JSZip;
+
+    public addPart(part: Part): void {
+        this.parts.push(part);
+    }
+    public addRelationship(relationship: Relationship): void {
+        this.relationships.push(relationship);
+    }
+
+    public getPart(partName: string): Part {
+        return this.parts.find(part => part.getPartName() === partName);
+    }
+    public getParts(): Part[] {
+        return this.parts;
+    }
+
+    public getRelationship(relationshipId: string): Relationship {
+        return this.relationships.find(relationship => relationship.getRelationshipId() === relationshipId);
+    };
+    public getRelationships(): Relationship[] {
+        return this.relationships;
+    }
+
+    public findRelatedPart(relationship: Relationship): Part {
+
+        if (relationship.getTargetMode() === "External") {
+            return null;
+        }
+
+        return this.getPart(relationship.target);
         
     }
+    
+
+
+    constructor() {}
 
 }

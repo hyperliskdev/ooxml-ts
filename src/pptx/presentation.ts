@@ -1,6 +1,6 @@
 import ContentType from "../shared/content-type";
 import Package from "../shared/package";
-import BasePart from "../shared/parts/base-part";
+import BasePart from "../shared/parts/part";
 import Relationships from "../shared/rels/relationships";
 
 export class Presentation implements Package {
