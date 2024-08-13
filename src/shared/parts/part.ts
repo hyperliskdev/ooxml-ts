@@ -6,7 +6,8 @@ export abstract class Part extends BaseXML {
     private text: string = "";
     private children: Part[] = [];
     private parent: Part | null = null;
-    private name: string = "";
+    
+    private fileName: string = "";
 
     constructor() {
         super();
@@ -52,11 +53,11 @@ export abstract class Part extends BaseXML {
     }
 
     public setPartName(name: string): void {
-        this.name = name;
+        this.fileName = name;
     }
 
     public getPartName(): string {
-        return this.name;
+        return this.fileName;
     }
 
 

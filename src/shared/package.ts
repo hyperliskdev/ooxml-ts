@@ -24,11 +24,26 @@ export default abstract class Package {
     private contentType: ContentType = new ContentType();
     // private trash: TrashItem[] = [];
 
-    // private zip: JSZip;
+    private zip: JSZip = new JSZip();
 
+    constructor() {
+        
+    }
+
+    /**
+     * @param part - The part to add to the package
+     * 
+     * Adds a part to the package.
+    */
     public addPart(part: Part): void {
         this.parts.push(part);
     }
+
+    /**
+     * @param relationship - The relationship to add to the package
+     *  
+     * Adds a relationship to the package.
+    */
     public addRelationship(relationship: Relationship): void {
         this.relationships.push(relationship);
     }
@@ -46,10 +61,22 @@ export default abstract class Package {
         }
         return part;
     }
+
+    /**
+     * @returns The parts in the package
+     * 
+     * Returns all the parts in the package.
+    */
     public getParts(): Part[] {
         return this.parts;
     }
 
+    /**
+     * @param relationshipId - The id of the relationship to retrieve
+     * @returns The relationship with the given id
+     * 
+     * If a relationship cannot be found, an error is thrown.
+     */
     public getRelationship(relationshipId: string): Relationship {
         const relationship = this.relationships.find(relationship => relationship.getId() === relationshipId);
         if (!relationship) {
@@ -57,30 +84,44 @@ export default abstract class Package {
         }
         return relationship;
     };
+
+    /**
+     * @returns The relationships in the package
+     * 
+     * Returns all the relationships in the package.
+    */
     public getRelationships(): Relationship[] {
         return this.relationships;
     }
 
-    /**
-     * 
-     * @param sourcePart - The part looking for some data in a related part
-     * @param relationship - The relationship that connects the source part to the target part
-     * @returns The target part
-     * 
-     * There are two different types of relationships: Explicit and Implicit.
-     * - Implicit relationships: `sourcePart.someIdentifier` == `targetPart.someIdentifier`. To find the location of `targetPart` we use the type of the source part.
-     * - Explicit relationships: `sourcePart.rId === relationship.Id`. To find the location of `targetPart` we use the relationship. 
-     * 
-     */
-    public findRelatedPart(sourcePart: Part, relationship: Relationship, isImplicit: boolean): Part {
-        let targetPart: Part;
 
-        if (isImplicit) {
-            targetPart = this.parts.find(part => part.getPartName() === sourcePart.getPartName());
-        } else {
-
-        }
+    // /**
+    //  *
+    //  * @param sourceId - The id of the part looking for a related part 
+    //  * 
+    // */
+    // public findExplicitlyRelatedPart(sourceId: string): Part {
         
+    // }
 
-    }
+    // /**
+    //  * 
+    //  * @param sourcePart - The part looking for some data in a related part
+    //  * @param relationship - The relationship that connects the source part to the target part
+    //  * @returns The target part
+    //  * 
+    //  * This method is used to find a related part based on a relationship.
+    //  * 
+    //  * The relationship can be either explicit or implicit. All relationships are implicit unless otherwise specified.
+    //  * 
+    //  * In an implicit relationship, the identifier of the source refers to a specific element with that same id in the target part.
+    //  * While in explicit relationships, the id refers to a relationship that connects the source to the target.
+    //  * 
+    //  * The method will return the target part if it is found, otherwise it will throw an error.
+    //  */
+    // public findImplicitlyRelatedPart(sourcePart: Part, relationship: Relationship): Part {
+
+
+    // }
+
 }

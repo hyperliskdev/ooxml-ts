@@ -48,7 +48,7 @@ export class AppProperties extends BaseXML {
     protected handleOpenTag(node: XMLNode): void {
         throw new Error("Method not implemented.");
     }
-    protected handleCloseTag(tag: string): void {
+    protected handleCloseTag<AppProperties>(tag: string): AppProperties {
         throw new Error("Method not implemented.");
     }
     protected handleText(text: string): void {

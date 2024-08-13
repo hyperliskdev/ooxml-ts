@@ -12,7 +12,30 @@ This project is based on the ECMA-376 & ISO/IEC-29500 standards. This is a stand
 
 ### Usage
 
+
 ### Roadmap
+
+The roadmap has been split into the MoSCoW (must-have, should-have, could-have or wont-have).
+
+#### Must-have
+
+- Compartmentalize the library by the three main document types (.xlsx, .pptx, .docx).
+- Dynamic part creation.
+- 
+
+#### Should-have
+
+- XML Validation against Schema Definitions
+- *maybe* XForms from ExcelJS
+  - Other options: ???
+
+#### Could-have
+
+- 
+
+#### Wont-have
+
+- 
 
 ### License
 
