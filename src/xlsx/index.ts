@@ -1,23 +1,19 @@
 import JSZip from "jszip";
 
 import OOXMLCommunicator from "../shared/ooxml-communicator";
-import { PassThrough, Stream } from "stream";
 import ContentType from "../shared/content-type";
-import Package from "../shared/package";
-import { Presentation } from "./presentation";
+import Workbook from "./workbook";
 
-export class PPTX extends OOXMLCommunicator {
-
-
+export class XLSX extends OOXMLCommunicator {
+  
   constructor() {
     super();
-    this.package = new Presentation();
-
+    this.package = new Workbook();
   }
 
-  async read<Presentation>(data: Buffer): Promise<Presentation> {
+  async read<Workbook>(data: Buffer): Promise<Workbook> {
     // Form the zip object from the file buffer
-    const zip = await JSZip.loadAsync(data);
+    const zip = await JSZip.loadAsync(new Uint8Array(data));
 
     // Sort the zip entries object from most shallow to most deep. And then alphabetically
     // This is to ensure that the content types file is read first.
@@ -33,16 +29,9 @@ export class PPTX extends OOXMLCommunicator {
 
     for (const entry of sortedEntries) {
       let entryName;
-
-      let stream = new PassThrough({
-        readableObjectMode: true,
-        writableObjectMode: true,
-      });
-
       if (!entry.dir) {
         entryName = entry.name;
         this.pushEntry(entryName);
-
         if (entryName.substring(0, 1) === "/") {
           entryName = entryName.substring(1);
         }
@@ -51,18 +40,32 @@ export class PPTX extends OOXMLCommunicator {
         continue;
       }
 
+      
+      
       let content = await entry.async("string");
 
-      const chunkSize = 16 * 1024;
-      for (let i = 0; i < content.length; i += chunkSize) {
-        stream.write(content.slice(i, i + chunkSize));
+      // Switch-case the entry name and handle the content accordingly
+      switch (entryName) {
+        // Content-Type item
+        case "[Content_Types].xml": {
+          console.log(content);
+        }
+
+        // Package Relationships
+        case "_rels/.rels": {
+          break;
+        }
+
+        // Application-Defined File Properties Part
+        case "docProps/app.xml": {
+        }
+
+        // Core File Properties Part
+        case "docProps/core.xml": {
+        }
       }
-
-      stream.end();
-
-      
     }
-    return {} as Presentation;
+    return {} as Workbook;
   }
 
   write(): Buffer {

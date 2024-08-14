@@ -1,5 +1,5 @@
 import { Stream } from "stream";
-import BasePart from "./base-part";
+import BasePart from "./part";
 
 /**
  * ## Bibliography

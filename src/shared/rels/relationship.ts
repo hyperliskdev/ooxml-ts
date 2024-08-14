@@ -1,41 +1,56 @@
-import { SAXParser } from "sax-ts";
-import { PassThrough } from "stream";
+import { BaseXML } from "../base-xml";
 
-const relParser = new SAXParser(false, {
-  xmlns: true,
-  position: true,
-});
+export abstract class Relationship extends BaseXML {
 
-export default class Relationship {
-  id: string = "";
-  type: string = "";
-  target: string = "";
-  targetMode?: string = "";
+    private id: string = "";
+    private type: string = "";
+    private target: string = "";
+    private targetMode?: string = "";
 
-  constructor() {};
+    constructor() {
+        super();
+    }
 
-  parse(stream: PassThrough) {
+    render(): string {
+        throw new Error("Method not implemented.");
+    }
 
-    let relationship: Relationship;
+    parseXml(xml: string): void {
+        throw new Error("Method not implemented.");
+    }
 
-    relParser.on("opentag", (node: any) => {
-      if (node.name === "Relationship") {
-        relationship = new Relationship();
-        relationship.id = node.attributes.Id;
-        relationship.type = node.attributes.Type;
-        relationship.target = node.attributes.Target;
-        relationship.targetMode = node.attributes.TargetMode;
-      }
-    });
+    public setId(id: string): void {
+        this.id = id;
+    }
 
-    stream.on("data", (chunk: Buffer) => {
-      relParser.write(chunk.toString());
-    });
+    public getId(): string {
+        return this.id;
+    }
 
-    stream.on("end", () => {
-      relParser.close();
-      return relationship;
-    });
+    public setType(type: string): void {
+        this.type = type;
+    }
 
-  }
+    public getType(): string {
+        return this.type;
+    }
+
+    public setTarget(target: string): void {
+        this.target = target;
+    }
+
+    public getTarget(): string {
+        return this.target;
+    }
+
+    public setTargetMode(targetMode: string): void {
+        this.targetMode = targetMode;
+    }
+
+    public getTargetMode(): string | undefined {
+        return this.targetMode;
+    }
+
+    public abstract getRelationshipType(): string;
+
 }
