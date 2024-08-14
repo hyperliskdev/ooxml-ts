@@ -27,6 +27,8 @@ export default abstract class Package {
     private zip: JSZip = new JSZip();
 
     constructor() {
+
+        
         
     }
 

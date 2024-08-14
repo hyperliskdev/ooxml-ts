@@ -13,7 +13,7 @@ export class XLSX extends OOXMLCommunicator {
 
   async read<Workbook>(data: Buffer): Promise<Workbook> {
     // Form the zip object from the file buffer
-    const zip = await JSZip.loadAsync(data);
+    const zip = await JSZip.loadAsync(new Uint8Array(data));
 
     // Sort the zip entries object from most shallow to most deep. And then alphabetically
     // This is to ensure that the content types file is read first.
@@ -39,6 +39,8 @@ export class XLSX extends OOXMLCommunicator {
         // If the entry is a directory, skip it and return to the beginning of the loop.
         continue;
       }
+
+      
       
       let content = await entry.async("string");
 
@@ -46,7 +48,7 @@ export class XLSX extends OOXMLCommunicator {
       switch (entryName) {
         // Content-Type item
         case "[Content_Types].xml": {
-          break;
+          console.log(content);
         }
 
         // Package Relationships
@@ -60,32 +62,6 @@ export class XLSX extends OOXMLCommunicator {
 
         // Core File Properties Part
         case "docProps/core.xml": {
-        }
-
-        // 
-        case "xl/workbook.xml": {
-        }
-
-        case "xl/_rels/workbook.xml.rels": {
-        }
-
-        case "xl/calcChain.xml": {
-        }
-
-        case "xl/sharedStrings.xml": {
-        }
-
-        case "xl/styles.xml": {
-        }
-
-        case "xl/theme/theme1.xml": {
-        }
-
-        case "xl/volatileDependencies.xml": {
-        }
-
-        default: {
-          console.log("Unhandled entry: ", entryName);
         }
       }
     }
