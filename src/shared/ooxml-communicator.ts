@@ -21,11 +21,24 @@ export default abstract class OOXMLCommunicator {
    * When rendering the package, the entry list can be used to identify what xml to write
    * to a specific file.
    */
-  getEntry(partName: string): string {
+  public getEntry(partName: string): string {
     return this.entryList[partName];
   }
 
-  abstract read<T extends Package>(data: Buffer): Promise<T>;
+  /**
+   * @param partName - The name of the part to add to the entry list
+   * 
+   * Adds an entry to the entry list.
+   * 
+   * The entry list contains the filename where a part is stored in the package.
+   * When rendering the package, the entry list can be used to identify what xml to write
+   * to a specific file.
+   */
+  public pushEntry(partName: string): void {
+    this.entryList[partName] = partName;
+  }
 
-  abstract write(): Buffer;
+  public abstract read<T extends Package>(data: Buffer): Promise<T>;
+
+  public abstract write(): Promise<Buffer>;
 }

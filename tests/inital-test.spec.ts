@@ -1,15 +1,13 @@
 import { readFileSync } from "fs";
-import { OOXML } from "..";
+import Workbook from '../src/xlsx/workbook';
+import * as OOXML from '../src/index';
 
 describe("Initial test", () => {
   it("Should print to the console", async () => {
     
-    let pptx = new OOXML.pptx.PPTX();
-
-    let file = await readFileSync("./tests/test_files/GoldStandardPPTX.pptx");
-    let presentation = await pptx.read(Buffer.from(file));
-    
-    console.log(presentation);
+    const workbook = new Workbook();
+    const data = readFileSync('tests/test-data/test.xlsx');
+    OOXML.xlsx.XLSX(workbook).read(data);
 
   })
 });

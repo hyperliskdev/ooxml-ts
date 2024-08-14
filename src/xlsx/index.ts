@@ -6,17 +6,18 @@ import Workbook from "./workbook";
 
 export class XLSX extends OOXMLCommunicator {
   
-  constructor() {
+  constructor(workbook: Workbook) {
     super();
-    this.package = new Workbook();
+    this.package = workbook;
   }
 
   async read<Workbook>(data: Buffer): Promise<Workbook> {
     // Form the zip object from the file buffer
     const zip = await JSZip.loadAsync(new Uint8Array(data));
 
-    // Sort the zip entries object from most shallow to most deep. And then alphabetically
-    // This is to ensure that the content types file is read first.
+    // Sort the zip entries object from most shallow to most deep. 
+    // Put [Content_Types].xml first, then _rels/.rels, then docProps/app.xml, then docProps/core.xml
+    // Then all the rest of the files.
     const sortedEntries = Object.values(zip.files).sort((a, b) => {
       if (a.dir && !b.dir) {
         return -1;
@@ -43,12 +44,12 @@ export class XLSX extends OOXMLCommunicator {
       
       
       let content = await entry.async("string");
-
+      console.log(entryName);
       // Switch-case the entry name and handle the content accordingly
       switch (entryName) {
         // Content-Type item
         case "[Content_Types].xml": {
-          console.log(content);
+          break;
         }
 
         // Package Relationships
@@ -68,7 +69,8 @@ export class XLSX extends OOXMLCommunicator {
     return {} as Workbook;
   }
 
-  write(): Buffer {
+  
+  async write(): Promise<Buffer> {
     throw new Error("Method not implemented.");
   }
 }

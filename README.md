@@ -39,6 +39,17 @@ The roadmap has been split into the MoSCoW (must-have, should-have, could-have o
 
 - 
 
+
+### Contributors
+
+<div align="center">
+  <a href="https://github.com/hyperliskdev/ooxml-ts/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=hyperliskdev/ooxml-ts" />
+  </a>
+
+  Made with [contrib.rocks](https://contrib.rocks).
+</div>
+
 ### License
 
 Distributed under the Apache 2.0 License. See [Apache 2.0 License](https://opensource.org/license/apache-2-0) for more information.
@@ -46,8 +57,3 @@ Distributed under the Apache 2.0 License. See [Apache 2.0 License](https://opens
 ### Contact
 
 Carter Tomlenovich - @hyperliskdev - cartertomlenovich@gmail.com
-
-
-https://github.com/hyperliskdev/ts-ooxml
-
-
