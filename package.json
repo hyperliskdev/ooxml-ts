@@ -9,7 +9,7 @@
     "/dist"
   ],
   "scripts": {
-    "test": "ts-mocha ./tests/**/*.ts --recursive --include ./tests/test_files/*",
+    "test": "ts-mocha --project tsconfig.json test/**/*.ts --recursive",
     "build": "tsc"
   },
   "repository": {

@@ -9,7 +9,7 @@ describe("Initial test", () => {
     const wb = new Workbook();
     const xlsx = new OOXML.xlsx.XLSX(wb);
 
-    const buffer = await readFile("./tests/test-files/test_file.xlsx");
+    const buffer = await readFile("./test/data/test_file.xlsx");
 
     let data = Buffer.from(buffer);
 

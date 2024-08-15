@@ -59,10 +59,12 @@ export class XLSX extends OOXMLCommunicator {
 
         // Application-Defined File Properties Part
         case "docProps/app.xml": {
+          break;
         }
 
         // Core File Properties Part
         case "docProps/core.xml": {
+          break;
         }
       }
     }
