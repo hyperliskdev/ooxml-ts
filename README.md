@@ -11,12 +11,10 @@
 
 This project is based on the ECMA-376 & ISO/IEC-29500 standards. This is a standard that describes the files types for .xlsx spreadsheet files, .docx word documents and .pptx presentation files.
 
-### Usage
-
 
 ### Roadmap
 
-The roadmap has been split into the MoSCoW (must-have, should-have, could-have or wont-have).
+The roadmap has been split into the MoSCoW Prioritization (must-have, should-have, could-have or wont-have).
 
 #### Must-have
 

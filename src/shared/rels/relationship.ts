@@ -1,6 +1,7 @@
-import { BaseXML } from "../base-xml";
+import { BaseXML, XMLAttribute, XMLNode } from "../base-xml";
 
-export abstract class Relationship extends BaseXML {
+export class Relationship extends BaseXML {
+
 
     private id: string = "";
     private type: string = "";
@@ -11,11 +12,23 @@ export abstract class Relationship extends BaseXML {
         super();
     }
 
-    render(): string {
+    protected handleOpenTag(node: XMLNode): void {
+        throw new Error("Method not implemented.");
+    }
+    protected handleCloseTag(tag: string): BaseXML {
+        throw new Error("Method not implemented.");
+    }
+    protected handleText(text: string): void {
+        throw new Error("Method not implemented.");
+    }
+    protected handleAttribute(attr: XMLAttribute): void {
+        throw new Error("Method not implemented.");
+    }
+    protected handleEnd(): void {
         throw new Error("Method not implemented.");
     }
 
-    parseXml(xml: string): void {
+    render(): string {
         throw new Error("Method not implemented.");
     }
 
@@ -50,7 +63,5 @@ export abstract class Relationship extends BaseXML {
     public getTargetMode(): string | undefined {
         return this.targetMode;
     }
-
-    public abstract getRelationshipType(): string;
 
 }

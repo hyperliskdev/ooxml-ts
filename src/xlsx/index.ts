@@ -3,6 +3,8 @@ import JSZip from "jszip";
 import OOXMLCommunicator from "../shared/ooxml-communicator";
 import ContentType from "../shared/content-type";
 import Workbook from "./workbook";
+import { Relationship } from "../shared/rels/relationship";
+import { Relationships } from "../shared/rels/relationships";
 
 export class XLSX extends OOXMLCommunicator {
   
@@ -14,6 +16,7 @@ export class XLSX extends OOXMLCommunicator {
   async read<Workbook>(data: Buffer): Promise<Workbook> {
     // Form the zip object from the file buffer
     const zip = await JSZip.loadAsync(new Uint8Array(data));
+    this.package.zip = zip;
 
     // Sort the zip entries object from most shallow to most deep. 
     // Put [Content_Types].xml first, then _rels/.rels, then docProps/app.xml, then docProps/core.xml
@@ -40,11 +43,9 @@ export class XLSX extends OOXMLCommunicator {
         // If the entry is a directory, skip it and return to the beginning of the loop.
         continue;
       }
-
       
       
       let content = await entry.async("string");
-      console.log(entryName);
       // Switch-case the entry name and handle the content accordingly
       switch (entryName) {
         // Content-Type item
@@ -54,6 +55,9 @@ export class XLSX extends OOXMLCommunicator {
 
         // Package Relationships
         case "_rels/.rels": {
+
+          let rels = new Relationships();
+          rels.parseXml(content);
           break;
         }
 
@@ -68,11 +72,14 @@ export class XLSX extends OOXMLCommunicator {
         }
       }
     }
-    return {} as Workbook;
+
+    return this.package as Workbook;
+    
   }
 
   
   async write(): Promise<Buffer> {
     throw new Error("Method not implemented.");
   }
+  
 }

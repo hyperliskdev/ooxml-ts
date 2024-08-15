@@ -12,24 +12,23 @@ import { Relationship } from "./rels/relationship";
 import { Part } from "./parts/part";
 import { AppProperties, CoreProperties } from "./properties";
 import ContentType from "./content-type";
+import { Relationships } from "./rels/relationships";
 
 
 export default abstract class Package {
 
 
     private parts: Part[] = [];
-    private relationships: Relationship[] = [];
+    private relationships: Relationships = new Relationships();
     private coreProperties: CoreProperties = new CoreProperties();
     private appProperties: AppProperties = new AppProperties();
     private contentType: ContentType = new ContentType();
     // private trash: TrashItem[] = [];
 
-    private zip: JSZip = new JSZip();
+    public zip: JSZip = new JSZip();
 
     constructor() {
 
-        
-        
     }
 
     /**
@@ -48,6 +47,10 @@ export default abstract class Package {
     */
     public addRelationship(relationship: Relationship): void {
         this.relationships.push(relationship);
+    }
+
+    public addRelationships(relationships: Relationships): void {
+        this.relationships = relationships;
     }
 
     /**
@@ -80,11 +83,7 @@ export default abstract class Package {
      * If a relationship cannot be found, an error is thrown.
      */
     public getRelationship(relationshipId: string): Relationship {
-        const relationship = this.relationships.find(relationship => relationship.getId() === relationshipId);
-        if (!relationship) {
-            throw new Error(`Relationship with id ${relationshipId} not found`);
-        }
-        return relationship;
+        return this.relationships.getRelById(relationshipId);
     };
 
     /**
@@ -92,7 +91,7 @@ export default abstract class Package {
      * 
      * Returns all the relationships in the package.
     */
-    public getRelationships(): Relationship[] {
+    public getRelationships(): Relationships {
         return this.relationships;
     }
 

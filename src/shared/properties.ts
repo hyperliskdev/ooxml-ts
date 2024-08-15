@@ -1,28 +1,20 @@
 import { BaseXML, XMLAttribute, XMLNode } from "./base-xml";
 
-export class CoreProperties extends BaseXML{
+export class CoreProperties extends BaseXML {
     
     properties: {
         [key: string]: string
     } = {};
 
+    
+
     constructor() {
         super();
+        
     }
 
 
     protected handleOpenTag(node: XMLNode): void {
-        let prefixRemoved = node.tag.split(":")[1];
-
-        if (prefixRemoved === "coreProperties") {
-            return;
-        }
-
-        switch (prefixRemoved) {
-
-        }
-        
-
     }
     protected handleCloseTag<CoreProperties>(tag: string): CoreProperties {
         throw new Error("Method not implemented.");
