@@ -2,7 +2,7 @@
   "name": "ooxml-ts",
   "version": "1.0.0",
   "description": "A JavaScript package written in TypeScript to perform reading/writing actions on OOXML files.",
-  "main": "./dist/ooxml.js",
+  "main": "./dist/index.js",
   "browser": "./dist/ooxml.min.js",
   "types": "./dist/index.d.ts",
   "files": [

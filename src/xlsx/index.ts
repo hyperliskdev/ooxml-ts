@@ -1,21 +1,22 @@
 import JSZip from "jszip";
 
-import OOXMLCommunicator from "../shared/ooxml-communicator";
-import ContentType from "../shared/content-type";
+import { OOXMLCommunicator } from "../shared/ooxml-communicator";
 import Workbook from "./workbook";
 
 export class XLSX extends OOXMLCommunicator {
-  
-  constructor(workbook: Workbook) {
+
+  // When creating a new XLSX file, create a blank workbook object.
+  // This object will be filled with the data from the file.
+  constructor() {
     super();
-    this.package = workbook;
+    this.package = new Workbook();
   }
 
   async read<Workbook>(data: Buffer): Promise<Workbook> {
     // Form the zip object from the file buffer
     const zip = await JSZip.loadAsync(new Uint8Array(data));
 
-    // Sort the zip entries object from most shallow to most deep. 
+    // Sort the zip entries object from most shallow to most deep.
     // Put [Content_Types].xml first, then _rels/.rels, then docProps/app.xml, then docProps/core.xml
     // Then all the rest of the files.
     const sortedEntries = Object.values(zip.files).sort((a, b) => {
@@ -41,8 +42,6 @@ export class XLSX extends OOXMLCommunicator {
         continue;
       }
 
-      
-      
       let content = await entry.async("string");
       console.log(entryName);
       // Switch-case the entry name and handle the content accordingly
@@ -69,7 +68,6 @@ export class XLSX extends OOXMLCommunicator {
     return {} as Workbook;
   }
 
-  
   async write(): Promise<Buffer> {
     throw new Error("Method not implemented.");
   }

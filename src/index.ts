@@ -1,2 +1,5 @@
-export * as pptx from './pptx';
-export * as xlsx from './xlsx';
+import { XLSX } from "./xlsx";
+
+export namespace OOXML {
+    export const xlsx = XLSX;
+}
