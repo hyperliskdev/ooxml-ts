@@ -6,16 +6,18 @@ import Workbook from "./workbook";
 
 export class XLSX extends OOXMLCommunicator {
   
-  constructor(workbook: Workbook) {
+
+  constructor() {
     super();
-    this.package = workbook;
+    this.package = new Workbook();
   }
 
   async read<Workbook>(data: Buffer): Promise<Workbook> {
+
     // Form the zip object from the file buffer
     const zip = await JSZip.loadAsync(new Uint8Array(data));
 
-    // Sort the zip entries object from most shallow to most deep. 
+    // Sort the zip entries object from most shallow to most deep.
     // Put [Content_Types].xml first, then _rels/.rels, then docProps/app.xml, then docProps/core.xml
     // Then all the rest of the files.
     const sortedEntries = Object.values(zip.files).sort((a, b) => {
@@ -32,7 +34,6 @@ export class XLSX extends OOXMLCommunicator {
       let entryName;
       if (!entry.dir) {
         entryName = entry.name;
-        this.pushEntry(entryName);
         if (entryName.substring(0, 1) === "/") {
           entryName = entryName.substring(1);
         }
@@ -44,12 +45,13 @@ export class XLSX extends OOXMLCommunicator {
       
       
       let content = await entry.async("string");
-      console.log(entryName);
+      this.pushEntry(entryName, content);
+
       // Switch-case the entry name and handle the content accordingly
       switch (entryName) {
         // Content-Type item
         case "[Content_Types].xml": {
-          break;
+          
         }
 
         // Package Relationships
@@ -63,7 +65,20 @@ export class XLSX extends OOXMLCommunicator {
 
         // Core File Properties Part
         case "docProps/core.xml": {
+
         }
+
+        default: {
+          if (entryName.endsWith(".xml")) {
+            // Handle Part files
+            
+          }
+
+          if (entryName.endsWith(".rels")) {
+            // Handle Relationship files
+          }
+        }
+        
       }
     }
     return {} as Workbook;

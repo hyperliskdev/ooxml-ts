@@ -17,19 +17,28 @@ import ContentType from "./content-type";
 export default abstract class Package {
 
 
-    private parts: Part[] = [];
-    private relationships: Relationship[] = [];
-    private coreProperties: CoreProperties = new CoreProperties();
-    private appProperties: AppProperties = new AppProperties();
-    private contentType: ContentType = new ContentType();
+    protected parts: Part[] = [];
+    protected relationships: Relationship[] = [];
+    protected coreProperties: CoreProperties = new CoreProperties();
+    protected appProperties: AppProperties = new AppProperties();
+    protected contentType: ContentType = new ContentType();
     // private trash: TrashItem[] = [];
 
     private zip: JSZip = new JSZip();
 
     constructor() {
+        
+    }
 
-        
-        
+
+    /**
+     * @param contentType - The content type to set
+     * 
+     * Sets the content type of the package.
+     * 
+     */
+    public setContentType(contentType: ContentType): void {
+        this.contentType = contentType;
     }
 
     /**

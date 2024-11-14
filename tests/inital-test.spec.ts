@@ -4,10 +4,17 @@ import * as OOXML from '../src/index';
 
 describe("Initial test", () => {
   it("Should print to the console", async () => {
-    
-    const workbook = new Workbook();
-    const data = readFileSync('tests/test-data/test.xlsx');
-    OOXML.xlsx.XLSX(workbook).read(data);
+
+    const data = readFileSync("tests/test_files/Risk Register - Construction.xlsx");
+
+    // Create an XLSX object
+    const xlsx = new OOXML.xlsx.XLSX();
+
+    // Read the file data into the xlsx object
+    const wb = await xlsx.read(data);
+
+    console.log(xlsx);
+
 
   })
 });

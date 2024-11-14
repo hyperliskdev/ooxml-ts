@@ -22,6 +22,7 @@ The roadmap has been split into the MoSCoW (must-have, should-have, could-have o
 
 - Compartmentalize the library by the three main document types (.xlsx, .pptx, .docx).
 - Dynamic part creation.
+- Read the important data and keep the other data needed to actually build the file back to original format.
 - 
 
 #### Should-have

@@ -1,4 +1,6 @@
 import Package from "../shared/package";
+import { Part } from "../shared/parts/part";
+import { Relationship } from "../shared/rels/relationship";
 
 /** 
  * The Workbook class represents the root of the document.
@@ -20,6 +22,7 @@ class Workbook extends Package {
     super();
 
   }
+
   
 }
 

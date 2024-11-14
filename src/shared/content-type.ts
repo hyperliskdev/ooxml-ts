@@ -39,8 +39,9 @@ export default class ContentType {
   // A list of all the overrides.
   overrides: Override[] = [];
 
-  parse(): void {
+  parseXml(content: string): void {
     // Parse the content type file.
+
     
     
   }
