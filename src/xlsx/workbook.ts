@@ -3,6 +3,9 @@ import { Part } from "../shared/parts/part";
 import { Relationship } from "../shared/rels/relationship";
 
 /** 
+ * 
+ * 
+ * 
  * The Workbook class represents the root of the document.
  * 
  * Functionally, the Workbook works basically like this:
@@ -12,17 +15,13 @@ import { Relationship } from "../shared/rels/relationship";
  * 
  * For tables, the data is not stored in the tableN.xml file, but in the sheetdataN.xml file.
  * 
+ * 
 */
-
 class Workbook extends Package {
-  
-  
-  
+
   constructor() {
     super();
-
   }
-
   
 }
 

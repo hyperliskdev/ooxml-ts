@@ -1,8 +1,10 @@
+import { BaseXML, XMLAttribute, XMLNode } from "./base-xml";
+
 class Override {
   // The part name of the override.
-  partName: string;
+  public partName: string;
   // The content type of the override.
-  contentType: string;
+  public contentType: string;
 
   constructor() {
     this.partName = "";
@@ -12,9 +14,9 @@ class Override {
 
 class Default {
   // The extension of the default content type.
-  extension: string;
+  public extension: string;
   // The content type of the default content type.
-  contentType: string;
+  public contentType: string;
 
   constructor() {
     this.extension = "";
@@ -33,16 +35,51 @@ class Default {
  * - Example: `<Override PartName="/word/fontTable.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.fontTable+xml"/>`
  *
  */
-export default class ContentType {
+export default class ContentType extends BaseXML {
+  
   // The default content type for the XML files.
-  default: Default[] = [];
+  public default: Default[] = [];
   // A list of all the overrides.
-  overrides: Override[] = [];
+  public overrides: Override[] = [];
 
-  parseXml(content: string): void {
-    // Parse the content type file.
-
-    
-    
+  constructor() {
+    super();
   }
+
+  protected handleOpenTag(node: XMLNode): void {
+    switch (node.name) {
+
+    
+      case "Default":
+        let def = new Default();
+        def.extension = node.attributes.Extension;
+        def.contentType = node.attributes.ContentType;
+        this.default.push(def);
+        break;
+      case "Override":
+        let over = new Override();
+        over.partName = node.attributes.PartName;
+        over.contentType = node.attributes.ContentType;
+        this.overrides.push(over);
+        break;
+
+      case "Types":
+        break;
+
+
+    }
+  }
+  protected handleCloseTag(tag: string): BaseXML {
+    return this;
+  }
+  protected handleText(text: string): void {
+    return;
+  }
+  protected handleAttribute(attr: XMLAttribute): void {
+    return;    
+  }
+  protected handleEnd(): void {
+    console.log("End");
+  }
+
 }

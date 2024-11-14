@@ -30,7 +30,22 @@ export default abstract class OOXMLCommunicator {
     this.entryList[filename] = content;
   }
 
+  /**
+   * @param data - The file buffer to read
+   * 
+   * Reads the file buffer and returns a package object.
+   * 
+   * @returns A package object
+   */
   public abstract read<T extends Package>(data: Buffer): Promise<T>;
 
-  public abstract write(): Promise<Buffer>;
+
+  /**
+   * @param p - The package object to write
+   * 
+   * Writes the package object to a buffer and returns the buffer.
+   * 
+   * @returns A buffer
+   */
+  public abstract write(p: Package): Promise<Buffer>;
 }

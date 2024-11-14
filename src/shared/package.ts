@@ -24,6 +24,7 @@ export default abstract class Package {
     protected contentType: ContentType = new ContentType();
     // private trash: TrashItem[] = [];
 
+    // 
     private zip: JSZip = new JSZip();
 
     constructor() {

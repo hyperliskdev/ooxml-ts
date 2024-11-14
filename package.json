@@ -20,6 +20,7 @@
   "author": "Carter Tomlenovich (hyperliskdev)",
   "license": "ISC",
   "devDependencies": {
+    "@microsoft/tsdoc": "^0.15.0",
     "@types/bun": "^1.1.3",
     "@types/chai": "^4.3.16",
     "@types/mocha": "^10.0.6",

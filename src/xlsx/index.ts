@@ -4,14 +4,25 @@ import OOXMLCommunicator from "../shared/ooxml-communicator";
 import ContentType from "../shared/content-type";
 import Workbook from "./workbook";
 
+/**
+ * The XLSX class is used to read and write XLSX files.
+ * 
+ * @extends OOXMLCommunicator
+ */
 export class XLSX extends OOXMLCommunicator {
   
-
   constructor() {
     super();
     this.package = new Workbook();
   }
 
+  /** 
+  * @param data - The file buffer to read
+  *
+  * Reads the file buffer and returns a workbook object.
+  * 
+  * @returns A workbook object
+  */
   async read<Workbook>(data: Buffer): Promise<Workbook> {
 
     // Form the zip object from the file buffer
@@ -45,13 +56,15 @@ export class XLSX extends OOXMLCommunicator {
       
       
       let content = await entry.async("string");
+      // Add entries to the package
       this.pushEntry(entryName, content);
 
       // Switch-case the entry name and handle the content accordingly
       switch (entryName) {
         // Content-Type item
         case "[Content_Types].xml": {
-          
+          const contentType = new ContentType();
+          contentType.parseXml(content);
         }
 
         // Package Relationships
@@ -82,11 +95,17 @@ export class XLSX extends OOXMLCommunicator {
         
       }
     }
-    return {} as Workbook;
+    return this.package as Workbook;
   }
 
-  
-  async write(): Promise<Buffer> {
+  /**
+   * @param wb - The workbook object to write
+   * 
+   * After making changes using the workbook object, turn the object back into a buffer.
+   * 
+   * @returns A buffer of the changes made to the file.
+  */ 
+  async write(wb: Workbook): Promise<Buffer> {
     throw new Error("Method not implemented.");
   }
 }

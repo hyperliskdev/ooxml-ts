@@ -9,10 +9,13 @@
 
 ## About the Project
 
-This project is based on the ECMA-376 & ISO/IEC-29500 standards. This is a standard that describes the files types for .xlsx spreadsheet files, .docx word documents and .pptx presentation files.
+This project is based on the ECMA-376 & ISO/IEC-29500 standards. This is a standard that describes the files types for .xlsx spreadsheet files, .docx word documents and .pptx presentation files. 
 
-### Usage
+### Built With
 
+- TypeScript
+- NodeJS
+- Jest
 
 ### Roadmap
 
