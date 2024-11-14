@@ -1,4 +1,3 @@
-import { Stream } from "stream";
 import { Part } from "./part";
 import { XMLNode, BaseXML, XMLAttribute } from "../base-xml";
 

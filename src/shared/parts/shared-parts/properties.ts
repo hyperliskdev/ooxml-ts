@@ -1,4 +1,4 @@
-import { BaseXML, XMLAttribute, XMLNode } from "./base-xml";
+import { BaseXML, XMLAttribute, XMLNode } from "../../base-xml";
 
 export class CoreProperties extends BaseXML{
     
@@ -12,16 +12,7 @@ export class CoreProperties extends BaseXML{
 
 
     protected handleOpenTag(node: XMLNode): void {
-        let prefixRemoved = node.tag.split(":")[1];
-
-        if (prefixRemoved === "coreProperties") {
-            return;
-        }
-
-        switch (prefixRemoved) {
-
-        }
-        
+        throw new Error("Method not implemented.");
 
     }
     protected handleCloseTag<CoreProperties>(tag: string): CoreProperties {

@@ -1,5 +1,6 @@
 import { SAXParser } from "sax-ts";
 
+// Interface for sax-ts attributes.
 export interface XMLAttribute {
   // The name of the attribute.
   name: string;
@@ -8,17 +9,15 @@ export interface XMLAttribute {
   value: string;
 }
 
+// Interface for sax-ts nodes.
 export interface XMLNode {
   // The name of the tag.
   name: string;
-
   // The attributes of the tag.
   attributes: { [key: string]: string };
 }
 
 export abstract class BaseXML {
-
-
 
   public render(): string {
     throw new Error("Method not implemented.");

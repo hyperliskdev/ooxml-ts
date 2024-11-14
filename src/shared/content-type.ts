@@ -49,7 +49,6 @@ export default class ContentType extends BaseXML {
   protected handleOpenTag(node: XMLNode): void {
     switch (node.name) {
 
-    
       case "Default":
         let def = new Default();
         def.extension = node.attributes.Extension;

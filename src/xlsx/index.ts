@@ -3,6 +3,8 @@ import JSZip from "jszip";
 import OOXMLCommunicator from "../shared/ooxml-communicator";
 import ContentType from "../shared/content-type";
 import Workbook from "./workbook";
+import { Part } from "../shared/parts/part";
+import { XlsxPart } from "./sml/xlsx-part";
 
 /**
  * The XLSX class is used to read and write XLSX files.
@@ -83,7 +85,13 @@ export class XLSX extends OOXMLCommunicator {
 
         default: {
           if (entryName.endsWith(".xml")) {
-            // Handle Part files
+            // Handle XML files
+            // In part, check the root element and handle accordingly.
+            const part = new XlsxPart();
+            console.log(entryName);
+            part.parseXml(content);
+
+            this.package.addPart(part);
             
 
           }

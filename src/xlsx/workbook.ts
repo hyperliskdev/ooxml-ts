@@ -1,6 +1,8 @@
+import { XMLNode, BaseXML, XMLAttribute } from "../shared/base-xml";
 import Package from "../shared/package";
 import { Part } from "../shared/parts/part";
 import { Relationship } from "../shared/rels/relationship";
+import Sheet from "./sml/worksheet";
 
 /** 
  * 
@@ -19,10 +21,14 @@ import { Relationship } from "../shared/rels/relationship";
 */
 class Workbook extends Package {
 
+  private sheets: Sheet[] = [];
+
+  
+
   constructor() {
     super();
-  }
   
+  }
 }
 
 
