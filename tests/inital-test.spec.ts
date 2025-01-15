@@ -1,11 +1,10 @@
 import { readFileSync } from "fs";
-import Workbook from '../src/xlsx/workbook';
 import * as OOXML from '../src/index';
 
 describe("Initial test", () => {
   it("Should print to the console", async () => {
 
-    const data = readFileSync("tests/test_files/Risk Register - Construction.xlsx");
+    const data = readFileSync("tests/test_files/Seized Device Filesystem Info.xlsx");
 
     // Create an XLSX object
     const xlsx = new OOXML.xlsx.XLSX();
@@ -36,9 +35,6 @@ describe("Initial test", () => {
 
     // Write the buffer to the file
     // writeFileSync("tests/test_files/Risk Register - Construction.xlsx", buffer);
-
-    // console.log(xlsx);
-
 
   })
 });

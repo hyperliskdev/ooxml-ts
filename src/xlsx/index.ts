@@ -3,6 +3,8 @@ import JSZip from "jszip";
 import OOXMLCommunicator from "../shared/ooxml-communicator";
 import ContentType from "../shared/content-type";
 import Workbook from "./workbook";
+import { CoreProperties } from "../shared/properties";
+import Relationships from "../shared/rels/relationships";
 
 /**
  * The XLSX class is used to read and write XLSX files.
@@ -52,8 +54,6 @@ export class XLSX extends OOXMLCommunicator {
         // If the entry is a directory, skip it and return to the beginning of the loop.
         continue;
       }
-
-      
       
       let content = await entry.async("string");
       // Add entries to the package
@@ -63,12 +63,17 @@ export class XLSX extends OOXMLCommunicator {
       switch (entryName) {
         // Content-Type item
         case "[Content_Types].xml": {
-          const contentType = new ContentType();
+          let contentType = new ContentType();
           contentType.parseXml(content);
+          this.package.setContentType(contentType);
+          console.log(content);
         }
 
         // Package Relationships
         case "_rels/.rels": {
+          // Handle Relationships
+          const relationships = this.package.getRelationships();
+          
           break;
         }
 
@@ -78,6 +83,9 @@ export class XLSX extends OOXMLCommunicator {
 
         // Core File Properties Part
         case "docProps/core.xml": {
+          let coreProperties = new CoreProperties();
+          coreProperties.parseXml(content);
+          console.log(coreProperties);
 
         }
 
@@ -85,11 +93,17 @@ export class XLSX extends OOXMLCommunicator {
           if (entryName.endsWith(".xml")) {
             // Handle Part files
             
+            
+            
 
           }
 
           if (entryName.endsWith(".rels")) {
             // Handle Relationship files
+            let newRelationships = new Relationships();
+            newRelationships.parseXml(content);
+
+            this.package.addRelationships(newRelationships);
           }
         }
         

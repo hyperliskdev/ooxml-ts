@@ -38,9 +38,11 @@ class Default {
 export default class ContentType extends BaseXML {
   
   // The default content type for the XML files.
-  public default: Default[] = [];
+  public defaults: Default[] = [];
   // A list of all the overrides.
   public overrides: Override[] = [];
+
+  public xmlns: string = ''
 
   constructor() {
     super();
@@ -48,13 +50,11 @@ export default class ContentType extends BaseXML {
 
   protected handleOpenTag(node: XMLNode): void {
     switch (node.name) {
-
-    
       case "Default":
         let def = new Default();
         def.extension = node.attributes.Extension;
         def.contentType = node.attributes.ContentType;
-        this.default.push(def);
+        this.defaults.push(def);
         break;
       case "Override":
         let over = new Override();
@@ -62,12 +62,14 @@ export default class ContentType extends BaseXML {
         over.contentType = node.attributes.ContentType;
         this.overrides.push(over);
         break;
-
       case "Types":
+        this.xmlns = node.attributes.xmlns
         break;
 
-
+      default:
+        break;
     }
+    return;
   }
   protected handleCloseTag(tag: string): BaseXML {
     return this;
@@ -79,7 +81,7 @@ export default class ContentType extends BaseXML {
     return;    
   }
   protected handleEnd(): void {
-    console.log("End");
+    return;
   }
 
 }

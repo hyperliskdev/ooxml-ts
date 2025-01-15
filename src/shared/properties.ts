@@ -3,7 +3,7 @@ import { BaseXML, XMLAttribute, XMLNode } from "./base-xml";
 export class CoreProperties extends BaseXML{
     
     properties: {
-        [key: string]: string
+        [key: string]: string;
     } = {};
 
     constructor() {
@@ -12,17 +12,8 @@ export class CoreProperties extends BaseXML{
 
 
     protected handleOpenTag(node: XMLNode): void {
-        let prefixRemoved = node.tag.split(":")[1];
-
-        if (prefixRemoved === "coreProperties") {
-            return;
-        }
-
-        switch (prefixRemoved) {
-
-        }
-        
-
+        this.properties[node.name] = JSON.stringify(node.attributes);
+        console.log(node)
     }
     protected handleCloseTag<CoreProperties>(tag: string): CoreProperties {
         throw new Error("Method not implemented.");

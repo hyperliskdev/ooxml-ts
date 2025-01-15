@@ -1,21 +1,18 @@
 import { BaseXML } from "../base-xml";
+import { Part } from "../parts/part";
 
-export abstract class Relationship extends BaseXML {
+export default class Relationship {
 
     private id: string = "";
     private type: string = "";
-    private target: string = "";
+    private target!: string;
     private targetMode?: string = "";
 
     constructor() {
-        super();
+
     }
 
     render(): string {
-        throw new Error("Method not implemented.");
-    }
-
-    parseXml(xml: string): void {
         throw new Error("Method not implemented.");
     }
 
@@ -50,7 +47,5 @@ export abstract class Relationship extends BaseXML {
     public getTargetMode(): string | undefined {
         return this.targetMode;
     }
-
-    public abstract getRelationshipType(): string;
 
 }

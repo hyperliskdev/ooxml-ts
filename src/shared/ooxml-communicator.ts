@@ -48,4 +48,5 @@ export default abstract class OOXMLCommunicator {
    * @returns A buffer
    */
   public abstract write(p: Package): Promise<Buffer>;
+
 }
