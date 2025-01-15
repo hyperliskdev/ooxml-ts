@@ -1,4 +1,4 @@
-import { BaseXML, XMLAttribute, XMLNode } from "./base-xml";
+import { BaseXML, XMLAttribute, XMLNode } from "../../base-xml";
 
 export class CoreProperties extends BaseXML{
     

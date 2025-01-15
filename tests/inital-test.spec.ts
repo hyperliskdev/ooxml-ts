@@ -12,6 +12,8 @@ describe("Initial test", () => {
     // Read the file data into the xlsx object
     const wb = await xlsx.read(data);
 
+    console.log(wb);
+
     // Do cool excel stuff with the workbook object
 
     // Get the sheet

@@ -1,5 +1,3 @@
-import { Stream } from "stream";
-
 /**
  * ## Additional Characteristics 
  * 

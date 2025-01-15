@@ -3,7 +3,9 @@ import JSZip from "jszip";
 import OOXMLCommunicator from "../shared/ooxml-communicator";
 import ContentType from "../shared/content-type";
 import Workbook from "./workbook";
-import { CoreProperties } from "../shared/properties";
+import { Part } from "../shared/parts/part";
+import { XlsxPart } from "./sml/xlsx-part";
+import { CoreProperties } from "../shared/parts/shared-parts/properties";
 import Relationships from "../shared/rels/relationships";
 
 /**
@@ -91,7 +93,13 @@ export class XLSX extends OOXMLCommunicator {
 
         default: {
           if (entryName.endsWith(".xml")) {
-            // Handle Part files
+            // Handle XML files
+            // In part, check the root element and handle accordingly.
+            const part = new XlsxPart();
+            console.log(entryName);
+            part.parseXml(content);
+
+            this.package.addPart(part);
             
             
             
@@ -103,7 +111,7 @@ export class XLSX extends OOXMLCommunicator {
             let newRelationships = new Relationships();
             newRelationships.parseXml(content);
 
-            this.package.addRelationships(newRelationships);
+            this.package.addRelationship(newRelationships);
           }
         }
         
