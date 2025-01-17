@@ -4,6 +4,7 @@ import { Part } from "../../shared/parts/part";
 /**
  * Part Relationship Target of Root Element Ref.
  * 
+ * This part contains several properties of the entire xlsx document, it may not contain things like sheet data and styles but it will contain things like metadata 
  */
 export class XlsxPart extends Part {
 
@@ -15,8 +16,6 @@ export class XlsxPart extends Part {
         console.log(node);
         switch (node.name) {
             case "calcChain":
-                
-
                 break;
             case "chartsheet":
                 break;

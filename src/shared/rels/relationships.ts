@@ -29,15 +29,15 @@ export default class Relationships extends BaseXML {
     }
 
     protected handleCloseTag(tag: string): BaseXML {
-        throw new Error("Method not implemented.");
+        return this;
     }
     protected handleText(text: string): void {
-        throw new Error("Method not implemented.");
+        console.log(text);
     }
     protected handleAttribute(attr: XMLAttribute): void {
-        throw new Error("Method not implemented.");
+        console.log(attr);
     }
     protected handleEnd(): void {
-        throw new Error("Method not implemented.");
+        console.log("End");
     }
 }

@@ -14,7 +14,7 @@ import Relationships from "../shared/rels/relationships";
  * @extends OOXMLCommunicator
  */
 export class XLSX extends OOXMLCommunicator {
-  
+
   constructor() {
     super();
     this.package = new Workbook();
@@ -56,7 +56,7 @@ export class XLSX extends OOXMLCommunicator {
         // If the entry is a directory, skip it and return to the beginning of the loop.
         continue;
       }
-      
+
       let content = await entry.async("string");
       // Add entries to the package
       this.pushEntry(entryName, content);
@@ -68,14 +68,13 @@ export class XLSX extends OOXMLCommunicator {
           let contentType = new ContentType();
           contentType.parseXml(content);
           this.package.setContentType(contentType);
-          console.log(content);
         }
 
         // Package Relationships
         case "_rels/.rels": {
           // Handle Relationships
           const relationships = this.package.getRelationships();
-          
+
           break;
         }
 
@@ -87,7 +86,7 @@ export class XLSX extends OOXMLCommunicator {
         case "docProps/core.xml": {
           let coreProperties = new CoreProperties();
           coreProperties.parseXml(content);
-          console.log(coreProperties);
+          // console.log(coreProperties);
 
         }
 
@@ -96,14 +95,9 @@ export class XLSX extends OOXMLCommunicator {
             // Handle XML files
             // In part, check the root element and handle accordingly.
             const part = new XlsxPart();
-            console.log(entryName);
             part.parseXml(content);
 
             this.package.addPart(part);
-            
-            
-            
-
           }
 
           if (entryName.endsWith(".rels")) {
@@ -112,9 +106,10 @@ export class XLSX extends OOXMLCommunicator {
             newRelationships.parseXml(content);
 
             this.package.addRelationship(newRelationships);
+
           }
         }
-        
+
       }
     }
     return this.package as Workbook;
@@ -126,7 +121,7 @@ export class XLSX extends OOXMLCommunicator {
    * After making changes using the workbook object, turn the object back into a buffer.
    * 
    * @returns A buffer of the changes made to the file.
-  */ 
+  */
   async write(wb: Workbook): Promise<Buffer> {
     throw new Error("Method not implemented.");
   }
