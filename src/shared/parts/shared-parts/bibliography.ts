@@ -1,5 +1,5 @@
-import { Stream } from "stream";
-import BasePart from "./part";
+import { Part } from "./part";
+import { XMLNode, BaseXML, XMLAttribute } from "../base-xml";
 
 /**
  * ## Bibliography
@@ -90,8 +90,20 @@ import BasePart from "./part";
  * - `<Year/>`
  * - `<YearAccessed/>`
  */
-export default class Bibliography extends BasePart {
-    render(): Stream {
+export default class Bibliography extends Part {
+    protected handleOpenTag(node: XMLNode): void {
+        throw new Error("Method not implemented.");
+    }
+    protected handleCloseTag(tag: string): BaseXML {
+        throw new Error("Method not implemented.");
+    }
+    protected handleText(text: string): void {
+        throw new Error("Method not implemented.");
+    }
+    protected handleAttribute(attr: XMLAttribute): void {
+        throw new Error("Method not implemented.");
+    }
+    protected handleEnd(): void {
         throw new Error("Method not implemented.");
     }
 }

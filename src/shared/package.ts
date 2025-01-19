@@ -10,26 +10,35 @@
 import JSZip from "jszip";
 import { Relationship } from "./rels/relationship";
 import { Part } from "./parts/part";
-import { AppProperties, CoreProperties } from "./properties";
+import { AppProperties, CoreProperties } from "./parts/shared-parts/properties";
 import ContentType from "./content-type";
 
 
 export default abstract class Package {
 
 
-    private parts: Part[] = [];
-    private relationships: Relationship[] = [];
-    private coreProperties: CoreProperties = new CoreProperties();
-    private appProperties: AppProperties = new AppProperties();
-    private contentType: ContentType = new ContentType();
+    protected parts: Part[] = [];
+    protected relationships: Relationship[] = [];
+    protected coreProperties: CoreProperties = new CoreProperties();
+    protected appProperties: AppProperties = new AppProperties();
+    protected contentType: ContentType = new ContentType();
     // private trash: TrashItem[] = [];
 
     private zip: JSZip = new JSZip();
 
     constructor() {
+        
+    }
 
-        
-        
+
+    /**
+     * @param contentType - The content type to set
+     * 
+     * Sets the content type of the package.
+     * 
+     */
+    public setContentType(contentType: ContentType): void {
+        this.contentType = contentType;
     }
 
     /**
@@ -50,19 +59,19 @@ export default abstract class Package {
         this.relationships.push(relationship);
     }
 
-    /**
-     * @param partName - The name of the part to retrieve
-     * @returns The part with the given name
-     * 
-     * If a part cannot be found, an error is thrown.
-     */
-    public getPart(partName: string): Part {
-        const part = this.parts.find(part => part.getPartName() === partName);
-        if (!part) {
-            throw new Error(`Part with name ${partName} not found`);
-        }
-        return part;
-    }
+    // /**
+    //  * @param partName - The name of the part to retrieve
+    //  * @returns The part with the given name
+    //  * 
+    //  * If a part cannot be found, an error is thrown.
+    //  */
+    // public getPart(partName: string): Part {
+    //     const part = this.parts.find(part => part.getPartName() === partName);
+    //     if (!part) {
+    //         throw new Error(`Part with name ${partName} not found`);
+    //     }
+    //     return part
+    // }
 
     /**
      * @returns The parts in the package

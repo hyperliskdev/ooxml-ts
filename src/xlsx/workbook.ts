@@ -1,6 +1,13 @@
+import { XMLNode, BaseXML, XMLAttribute } from "../shared/base-xml";
 import Package from "../shared/package";
+import { Part } from "../shared/parts/part";
+import { Relationship } from "../shared/rels/relationship";
+import Sheet from "./sml/worksheet";
 
 /** 
+ * 
+ * 
+ * 
  * The Workbook class represents the root of the document.
  * 
  * Functionally, the Workbook works basically like this:
@@ -10,17 +17,18 @@ import Package from "../shared/package";
  * 
  * For tables, the data is not stored in the tableN.xml file, but in the sheetdataN.xml file.
  * 
+ * 
 */
-
 class Workbook extends Package {
+
+  private sheets: Sheet[] = [];
+
   
-  
-  
+
   constructor() {
     super();
-
-  }
   
+  }
 }
 
 

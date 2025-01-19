@@ -1,31 +1,20 @@
 import { SAXParser } from "sax-ts";
 
+// Interface for sax-ts attributes.
 export interface XMLAttribute {
+  // The name of the attribute.
   name: string;
+
+  // The value of the attribute.
   value: string;
-  prefix: string;
-  local: string;
-  uri: string;
 }
 
+// Interface for sax-ts nodes.
 export interface XMLNode {
   // The name of the tag.
-  tag: string;
-  // The list of attributes.
-  attributes: { [key: string]: XMLAttribute };
-
-  // The list of namespace properties.
-  ns: {
-    [key: string]: string;
-  };
-
-  // Tag namespace properties
-  prefix: string;
-  local: string;
-  uri: string;
-
-  // If the current tag is self-closing. <tag />
-  isSelfClosing: boolean;
+  name: string;
+  // The attributes of the tag.
+  attributes: { [key: string]: string };
 }
 
 export abstract class BaseXML {
@@ -36,24 +25,28 @@ export abstract class BaseXML {
 
   public parseXml(xml: string): void {
     const parser = new SAXParser(true, {});
-    let current: BaseXML = this;
+    let current = this;
 
-    parser.onopentag = (node: XMLNode) => {
+
+    parser.onopentag = (node: any) => {
+
       current.handleOpenTag(node);
     };
     parser.onclosetag = (tag: string) => {
-      current = current.handleCloseTag(tag);
+      current = current.handleCloseTag(tag) as this;
     };
     parser.ontext = (text: string) => {
       current.handleText(text);
     };
-    parser.onattribute = (attr: XMLAttribute) => {
+    parser.onattribute = (attr: any) => {
       current.handleAttribute(attr);
     };
     parser.onend = () => {
       current.handleEnd();
     };
-    parser.write
+
+    parser.write(xml).close();
+
   }
 
   /* Handle reading an open tag. */

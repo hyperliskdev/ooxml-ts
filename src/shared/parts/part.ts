@@ -1,66 +1,25 @@
-import { BaseXML, XMLAttribute } from "../base-xml";
+import { BaseXML, XMLAttribute, XMLNode } from "../base-xml";
 
 export abstract class Part extends BaseXML {
-
-    private attributes: XMLAttribute[] = [];
-    private text: string = "";
-    private children: Part[] = [];
-    private parent: Part | null = null;
-    
-    private fileName: string = "";
 
     constructor() {
         super();
     }
 
-    public render(): string {
+    // Create each new part based on the root node.
+    protected handleOpenTag(node: XMLNode): void {
         throw new Error("Method not implemented.");
     }
-    public parseXml(xml: string): void {
+    protected handleCloseTag(tag: string): BaseXML {
         throw new Error("Method not implemented.");
     }
-
-    public addAttribute(attribute: XMLAttribute): void {
-        this.attributes.push(attribute);
+    protected handleText(text: string): void {
+        throw new Error("Method not implemented.");
     }
-
-    public getAttributes(): XMLAttribute[] {
-        return this.attributes;
+    protected handleAttribute(attr: XMLAttribute): void {
+        throw new Error("Method not implemented.");
     }
-
-    public setText(text: string): void {
-        this.text = text;
+    protected handleEnd(): void {
+        throw new Error("Method not implemented.");
     }
-
-    public getText(): string {
-        return this.text;
-    }
-
-    public addChild(child: Part): void {
-        this.children.push(child);
-    }
-
-    public getChildren(): Part[] {
-        return this.children;
-    }
-
-    public setParent(parent: Part): void {
-        this.parent = parent;
-    }
-
-    public getParent(): Part | null {
-        return this.parent;
-    }
-
-    public setPartName(name: string): void {
-        this.fileName = name;
-    }
-
-    public getPartName(): string {
-        return this.fileName;
-    }
-
-
-    
-    
 }

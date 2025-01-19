@@ -1,6 +1,6 @@
 <div align="center">
     <img src="./assets/imgs/ooxml-logo.png" alt="project logo"/> <br/>
-    <i>oh-oh ecks-em-el</i> <br>
+    <i>əʊ-əʊ ɛks-ɛm-ɛl</i> <br>
     A TypeScript library for OOXML files. (pptx, xlsx and docx) <br/> <br/>
     <a href="https://github.com/hyperliskdev/ooxml-ts/wiki"><b>Explore the Wiki </b></a> <br/>
      <a href="https://github.com/hyperliskdev/ooxml-ts/wiki/Developer-Guide">Join the Project .</a> <a href="https://github.com/hyperliskdev/ooxml-ts/issues/new?assignees=&labels=&projects=&template=bug_report.md&title=">Report Bug .</a> <a href="https://github.com/hyperliskdev/ooxml-ts/issues/new?assignees=&labels=&projects=&template=feature_request.md&title=">Request Feature</a> </p>
@@ -9,9 +9,13 @@
 
 ## About the Project
 
-This project is based on the ECMA-376 & ISO/IEC-29500 standards. This is a standard that describes the files types for .xlsx spreadsheet files, .docx word documents and .pptx presentation files.
+This project is based on the ECMA-376 & ISO/IEC-29500 standards. This is a standard that describes the files types for .xlsx spreadsheet files, .docx word documents and .pptx presentation files. 
 
-### Usage
+### Built With
+
+- TypeScript
+- NodeJS
+- Jest
 
 
 ### Roadmap
@@ -22,6 +26,7 @@ The roadmap has been split into the MoSCoW (must-have, should-have, could-have o
 
 - Compartmentalize the library by the three main document types (.xlsx, .pptx, .docx).
 - Dynamic part creation.
+- Read the important data and keep the other data needed to actually build the file back to original format.
 - 
 
 #### Should-have
